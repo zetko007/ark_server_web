@@ -181,6 +181,7 @@
                 document.getElementById('server-name-placeholder').innerText = serverName;
                 document.getElementById('player-count').innerText = playerCount;
                 document.getElementById('server-status').innerText = serverStatus;
+                document.getElementById('server-name').innerText = serverName; // Update header name
             } catch (error) {
                 console.error('Error fetching server details:', error);
                 document.getElementById('server-name-placeholder').innerText = 'Error fetching server name';
@@ -193,4 +194,3 @@
     </script>
 </body>
 </html>
-
