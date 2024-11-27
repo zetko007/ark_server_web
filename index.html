@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abandia - Ark Server Info</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('abandiapic_optimized.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Dark overlay background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header Section */
+        header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #76d275;
+            letter-spacing: 1.5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Section styles */
+        .section {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: #76d275;
+            margin-bottom: 25px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .section a {
+            color: #76d275;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .section a:hover {
+            color: #4CAF50;
+        }
+
+        .discord-logo {
+            max-width: 300px;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .discord-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer Section */
+        footer {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .section h2 {
+                font-size: 1.6rem;
+            }
+
+            .discord-logo {
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Header Section -->
+    <header>
+        <h1 id="server-name">Abandia</h1>
+    </header>
+
+    <!-- Server Info Section -->
+    <div class="section">
+        <h2>Server Information</h2>
+        <p><strong>Server Name:</strong> <span id="server-name-placeholder">Loading...</span></p>
+        <p><strong>Players:</strong> <span id="player-count">Loading...</span></p>
+        <p><strong>Region:</strong> EU</p>
+        <p><strong>Current Event:</strong> #WinterEvent: Player Resist: 100%, 8x XP, 8x Harvesting, 10x Taming</p>
+        <p><strong>IP Address:</strong> <a href="steam://connect/94.230.147.88:7779">94.230.147.88:7779</a></p>
+        <p><strong>Map:</strong> TheIsland_WP</p>
+        <p><strong>Server Type:</strong> Unofficial, PVE</p>
+        <p><strong>Allowed Platforms:</strong> PC (Steam), Xbox, PC (Windows Store), Playstation</p>
+        <p><strong>Mods:</strong> Vanilla</p>
+        <p><strong>Status:</strong> <span id="server-status">Loading...</span></p>
+    </div>
+
+    <!-- Discord Invite Section -->
+    <div class="section">
+        <h2>Join Our Discord</h2>
+        <p>Connect with us for the latest news, events, and support!</p>
+        <div class="discord-link">
+            <a href="https://t.ly/abandia" target="_blank">
+                <img src="image.png" alt="Join Our Discord" class="discord-logo">
+            </a>
+        </div>
+        <p><strong>Discord Link:</strong> <a href="https://t.ly/abandia" target="_blank">https://t.ly/abandia</a></p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Abandia - Kaktus Servers. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Fetching Server Details -->
+    <script>
+        const battleMetricsURL = 'https://api.battlemetrics.com/servers/30245333'; // Replace with your server ID
+
+        async function fetchServerDetails() {
+            try {
+                const response = await fetch(battleMetricsURL);
+                const data = await response.json();
+                const serverName = data.data.attributes.name;
+                const playerCount = data.data.attributes.players;
+                const serverStatus = data.data.attributes.status === 'online' ? 'Online' : 'Offline';
+
+                // Update server name, player count, and status
+                document.getElementById('server-name-placeholder').innerText = serverName;
+                document.getElementById('player-count').innerText = playerCount;
+                document.getElementById('server-status').innerText = serverStatus;
+            } catch (error) {
+                console.error('Error fetching server details:', error);
+                document.getElementById('server-name-placeholder').innerText = 'Error fetching server name';
+                document.getElementById('player-count').innerText = 'Error fetching player count';
+                document.getElementById('server-status').innerText = 'Error fetching server status';
+            }
+        }
+
+        fetchServerDetails();
+    </script>
+</body>
+</html>
+
