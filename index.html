@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Abandia's Ark servers for top-notch gameplay. Connect with us on Discord for updates and support.">
+    <meta property="og:title" content="Abandia - Ark Server Info">
+    <meta property="og:description" content="Explore Abandia's Ark servers for top-notch gameplay. Connect with us on Discord for updates and support.">
+    <meta property="og:image" content="abandiapic_optimized.jpg">
+    <meta property="og:url" content="https://yourwebsite.com">
     <title>Abandia - Ark Server Info</title>
-    
-    <!-- Google Fonts -->
+
+    <!-- Preloading Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
@@ -130,7 +136,7 @@
 
     <!-- Header Section -->
     <header>
-        <h1>Abandia servers</h1>
+        <h1>Abandia Servers</h1>
     </header>
 
     <!-- Server Info Section -->
@@ -181,9 +187,8 @@
                 document.getElementById('server-name-placeholder').innerText = serverName;
                 document.getElementById('player-count').innerText = playerCount;
                 document.getElementById('server-status').innerText = serverStatus;
-                document.getElementById('server-name').innerText = serverName; // Update header name
             } catch (error) {
-                console.error('Error fetching server details:', error);
+                console.error('Error fetching server details:', error.message);
                 document.getElementById('server-name-placeholder').innerText = 'Error fetching server name';
                 document.getElementById('player-count').innerText = 'Error fetching player count';
                 document.getElementById('server-status').innerText = 'Error fetching server status';
